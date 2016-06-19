@@ -65,7 +65,14 @@ class TopicsController < ApplicationController
     @topic.votes.create
     redirect_to(topics_path)
   end
+  def downvote
+    @topic = Topic.find(params[:id])
+    if @topic.votes.first
+      @topic.votes.first.delete
+    end
+    redirect_to(topics_path)
 
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
